@@ -20,6 +20,35 @@ const Contratacion = instance.model('Contratacion', {
     valor: {
         type: 'int',
         required: true
-    }
+    },
+    pertenece_a_deportista: {
+        type: 'relationship',
+        target: 'Deportista',
+        relationship: 'PERTENECE_A',
+        direction: 'out',
+        eager: true
+    },
+    pertenece_a_equipo: {
+        type: 'relationship',
+        target: 'Equipo',
+        relationship: 'PERTENECE_A',
+        direction: 'out',
+        eager: true
+    },
+    deportista: {
+        type: 'node',
+        target: 'Deportista',
+        relationship: 'PERTENECE_A',
+        direction: 'out',
+        eager: true
+    },
+    equipo: {
+        type: 'node',
+        target: 'Equipo',
+        relationship: 'PERTENECE_A',
+        direction: 'out',
+        eager: true
+    },
+    
 
 })

@@ -74,7 +74,7 @@ const EquipoFutbol = instance.model('Equipo', {
 })
 
 const EquipoNFL = instance.model('Equipo', {
-    
+
     equipo_id: {
         type: 'uuid',
         primary: true,
@@ -114,6 +114,15 @@ const EquipoNFL = instance.model('Equipo', {
         eager: true
 
     },
+    practica: {
+
+        type: 'relationship',
+        target: 'Deporte',
+        relationship: 'PRACTICA',
+        direction: 'out',
+        eager: true
+
+    },
     jugadores: {
         type: 'nodes',
         target: 'Deportista',
@@ -129,6 +138,13 @@ const EquipoNFL = instance.model('Equipo', {
         direction: 'out',
         eager: true
 
+    },
+    deporte: {
+        type: 'node',
+        target: 'Deporte',
+        relationship: 'PRACTICA',
+        direction: 'out',
+        eager: true
     }
 })
 
