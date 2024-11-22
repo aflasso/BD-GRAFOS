@@ -26,7 +26,11 @@ const Pais = instance.model('Pais', {
         target: 'Equipo',
         relationship: 'LUGAR_DE_ORIGEN_DE',
         direction: 'out',
-        eager: true
+        eager: true,
+        properties: {
+            ciudad_de_nacimiento: {type: 'string', required:true},
+            fecha_de_nacimiento: {type: 'date', required: true}
+        },
     },
     jugadores: {
         type: 'nodes',
