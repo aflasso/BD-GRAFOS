@@ -41,7 +41,10 @@ const DeportistaFutbol = instance.model('Deportista', {
         target: 'Equipo',
         relationship: 'JUEGA_EN',
         direction: 'out',
-        eager: true
+        eager: true,
+        properties: {
+            fecha_vinculacion: {type: 'date', required: true}
+        }
     },
     equipo: {
         type: 'node',
