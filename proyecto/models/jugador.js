@@ -14,6 +14,12 @@ const DeportistaFutbol = instance.model('Deportista', {
         required: true,
         unique: true
     },
+    deporte_asignado: {
+        type: 'string',
+        default: 'futbol',
+        required: false
+    },
+
     sexo: {
         type: 'string',
         valid: ['Hombre', 'Mujer', 'Otro']
@@ -66,6 +72,12 @@ const DeportistaNFL = instance.model('Deportista', {
         primary: true,
         type: 'uuid',
         required: true
+    },
+
+    deporte_asignado: {
+        type: 'string',
+        default: 'nfl',
+        required: false
     },
 
     nombre: {
