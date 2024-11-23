@@ -54,3 +54,5 @@ const Deporte = instance.model('Deporte', {
 
     }
 })
+
+module.exports = {Deporte}
