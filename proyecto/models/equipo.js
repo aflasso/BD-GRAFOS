@@ -1,12 +1,14 @@
 const {instance} =  require('../db')
+const {v4: uuidv4} = require('uuid')
 
 const EquipoFutbol = instance.model('Equipo', {
 
     equipo_id: {
         primary: true,
         type: 'uuid',
-        required: true,
-        unique: true
+        required: false,
+        unique: true,
+        default: () => uuidv4()
     },
     nombre: {
         type: 'string',
@@ -78,8 +80,9 @@ const EquipoNFL = instance.model('Equipo', {
     equipo_id: {
         type: 'uuid',
         primary: true,
-        required: true,
-        unique: true
+        required: false,
+        unique: true,
+        default: () => uuidv4()
     },
     nombre: {
         type: 'string',

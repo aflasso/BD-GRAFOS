@@ -1,5 +1,5 @@
-const { int } = require('neo4j-driver')
 const {instance} = require('../db')
+const {v4: uuidv4} = require('uuid')
 
 const Deporte = instance.model('Deporte', {
 
@@ -7,7 +7,8 @@ const Deporte = instance.model('Deporte', {
         primary: true,
         type: 'uuid',
         primary: true,
-        required: true
+        required: false,
+        default: () => uuidv4()
     },
 
     nombre: {

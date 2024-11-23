@@ -1,12 +1,15 @@
 const {instance} = require('../db')
+const {v4: uuidv4} = require('uuid')
+
 
 const Pais = instance.model('Pais', {
 
     pais_id: {
         primary: true,
         type: 'uuid',
-        required: true,
-        unique: true
+        required: false,
+        unique: true,
+        default: () => uuidv4()
     },
 
     nombre: {

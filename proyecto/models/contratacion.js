@@ -1,4 +1,5 @@
 const {instance} = require('../db')
+const {v4: uuidv4} = require('uuid')
 
 const Contratacion = instance.model('Contratacion', {
 
@@ -6,7 +7,8 @@ const Contratacion = instance.model('Contratacion', {
         primary: true,
         type: 'uuid',
         primary: true,
-        required: true
+        required: false,
+        default: () => uuidv4()
     },
 
     fecha_inicio: {
