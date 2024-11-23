@@ -9,6 +9,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const adminRoutes = require('./routes/admin')
 
+require('./models/contratacion')
+require('./models/deporte')
+require('./models/equipo')
+require('./models/jugador')
+require('./models/pais')
+
 var app = express();
 
 // view engine setup
