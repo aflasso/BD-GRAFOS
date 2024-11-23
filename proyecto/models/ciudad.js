@@ -1,7 +1,7 @@
 const {instance} = require('../db')
 const {v4: uuidv4} = require('uuid')
 
-const Contratacion = instance.model('Contratacion', {
+const Ciudad = instance.model('Ciudad', {
 
     ciudad_id: {
         primary: true,
@@ -60,3 +60,5 @@ const Contratacion = instance.model('Contratacion', {
     }
     
 })
+
+module.exports = {Ciudad}
