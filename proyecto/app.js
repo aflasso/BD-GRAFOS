@@ -14,6 +14,7 @@ require('./models/deporte')
 require('./models/equipo')
 require('./models/jugador')
 require('./models/pais')
+require('./models/ciudad')
 
 var app = express();
 
