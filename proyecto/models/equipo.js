@@ -31,7 +31,11 @@ const EquipoFutbol = instance.model('Equipo', {
         target: 'Deportista',
         relationship: 'FICHA_A',
         direction: 'out',
-        eager: true
+        eager: true,
+        properties: {
+            contratacion_id: {type: 'string', required: true},
+            fecha_vinculacion: {type: 'date', required: true}
+        }
 
     },
     asignado_a: {
@@ -89,23 +93,29 @@ const EquipoNFL = instance.model('Equipo', {
         required: true
     },
     fundacion: {
-        type: 'int',
+        type: 'date',
         required: false
     },
     estadio: {
         type: 'string',
-        required: false  // Nombre del estadio donde juega el equipo (opcional)
+        required: false
+          // Nombre del estadio donde juega el equipo (opcional)
     },
     division: {
         type: 'string',
-        required: true  // División a la que pertenece el equipo (ejemplo: AFC East, NFC West)
+        required: true,
+  // División a la que pertenece el equipo (ejemplo: AFC East, NFC West)
     },
     ficha_a: {
         type: "relationship",
         target: 'Deportista',
         relationship: 'FICHA_A',
         direction: 'out',
-        eager: true
+        eager: true,
+        properties: {
+            contratacion_id: {type: 'string', required: true},
+            fecha_vinculacion: {type: 'date', required: true}
+        }
 
     },
     asignado_a: {
@@ -122,6 +132,15 @@ const EquipoNFL = instance.model('Equipo', {
         type: 'relationship',
         target: 'Deporte',
         relationship: 'PRACTICA',
+        direction: 'out',
+        eager: true
+
+    },
+    genera_contrato: {
+
+        type: 'relationship',
+        target: 'Contratacion',
+        relationship: 'GENERA_CONTRATO',
         direction: 'out',
         eager: true
 
@@ -148,8 +167,18 @@ const EquipoNFL = instance.model('Equipo', {
         relationship: 'PRACTICA',
         direction: 'out',
         eager: true
+    },
+    contratos: {
+        type: 'nodes',
+        target: 'Contratacion',
+        relationship: 'GENERA_CONTRATO',
+        direction: 'out',
+        eager: true
     }
 })
+
+
+
 
 
 module.exports = {EquipoFutbol, EquipoNFL}

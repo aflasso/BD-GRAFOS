@@ -1,12 +1,11 @@
 const expres = require('express');
 const router = expres.Router()
 
-const {deportistaFutbol} = require('../../../models/jugador')
+const {getAll, post, put, delete_node} = require('../../../controllers/futbol/jugadores')
 
-router.get('/',async function(req, res, next) {
-
-    res.render('index', { title: 'Futbol Jugadores' });
-    
-});
+router.get('/', getAll);
+router.post('/', post)
+router.put('/:id', put)
+router.delete('/:id', delete_node)
 
 module.exports = router

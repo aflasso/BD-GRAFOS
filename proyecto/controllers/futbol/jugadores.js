@@ -1,11 +1,11 @@
-const {DeportistaNFL} = require('../../models/jugador')
+const {DeportistaFutbol} = require('../../models/jugador')
 const {response, request} = require('express')
 const {Pais} = require('../../models/pais')
 
 const getAll = async (req = request, res = response) => {
 
     try {
-        const deportistas = await DeportistaNFL.all({deporte_asignado: 'nfl'})
+        const deportistas = await DeportistaFutbol.all({deporte_asignado: 'futbol'})
 
         const deportistas_format = await Promise.all(deportistas.map(async (node) => {
 
@@ -49,7 +49,7 @@ const post = async (req = request, res = response, next) => {
 
         }
 
-        const deportista_nuevo = await DeportistaNFL.create(deportista_body)
+        const deportista_nuevo = await DeportistaFutbol.create(deportista_body)
 
         deportista_nuevo.relateTo(pais_origen, 'es_de')
         pais_origen.relateTo(deportista_nuevo, 'lugar_de_nacimiento_de', {ciudad_de_nacimiento, fecha_de_nacimiento})
@@ -70,9 +70,9 @@ const put = async (req = request, res = response, next) => {
     try {
         const deportista_id = req.params.id
 
-        const {nombre, posicion, touchdowns, yardas} = req.body
+        const {nombre, posicion, goles, asistencias} = req.body
 
-        const deportista_seleccionado = await DeportistaNFL.find(deportista_id)
+        const deportista_seleccionado = await DeportistaFutbol.find(deportista_id)
 
         if (!deportista_seleccionado) {
 
@@ -80,7 +80,7 @@ const put = async (req = request, res = response, next) => {
             return res.status(400).json({status: 'fail', data: 'El deportista no existe'})
         }
 
-        const nuevo_nodo = await deportista_seleccionado.update({nombre, posicion, touchdowns, yardas})
+        const nuevo_nodo = await deportista_seleccionado.update({nombre, posicion, goles, asistencias})
 
         const nuevo_nodo_json = await nuevo_nodo.toJson()
 
@@ -99,7 +99,7 @@ const delete_node = async (req = request, res = response, next) => {
         
         const deportista_id = req.params.id
 
-        const deportista_seleccionado = await DeportistaNFL.find(deportista_id)
+        const deportista_seleccionado = await DeportistaFutbol.find(deportista_id)
 
         if (!deportista_seleccionado) {
 

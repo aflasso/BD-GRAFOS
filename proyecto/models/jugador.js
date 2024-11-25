@@ -45,8 +45,10 @@ const DeportistaFutbol = instance.model('Deportista', {
         direction: 'out',
         eager: true,
         properties: {
+            contratacion_id: {type: 'string', required: true},
             fecha_vinculacion: {type: 'date', required: true}
         }
+
     },
     equipo: {
         type: 'node',
@@ -66,6 +68,20 @@ const DeportistaFutbol = instance.model('Deportista', {
         type: 'node',
         target: 'Pais',
         relationship: 'ES_DE',
+        direction: 'out',
+        eager: true
+    },
+    sujeto_a_una: {
+        type: 'relationship',
+        target: 'Contratacion',
+        relationship: 'SUJETO_A_UNA',
+        direction: 'out',
+        eager: true
+    },
+    contratos: {
+        type: 'nodes',
+        target: 'Contratacion',
+        relationship: 'SUJETO_A_UNA',
         direction: 'out',
         eager: true
     }
@@ -89,10 +105,11 @@ const DeportistaNFL = instance.model('Deportista', {
     nombre: {
         type: 'string',
         required: true
-    },    
+    },
     sexo: {
         type: 'string',
-        valid: ['Hombre', 'Mujer', 'Otro']
+        valid: ['Hombre', 'Mujer', 'Otro'],
+        required: true
     },
     posicion: {
         type: 'string',
@@ -107,12 +124,23 @@ const DeportistaNFL = instance.model('Deportista', {
         type: 'int',
         default: 0 // Valor predeterminado
     },
+    sujeto_a_una: {
+        type: 'relationship',
+        target: 'Contratacion',
+        relationship: 'SUJETO_A_UNA',
+        direction: 'out',
+        eager: true
+    },
     juega_en: {
         type: 'relationship',
         target: 'Equipo',
         relationship: 'JUEGA_EN',
         direction: 'out',
-        eager: true
+        eager: true,
+        properties: {
+            contratacion_id: {type: 'string', required: true},
+            fecha_vinculacion: {type: 'date', required: true}
+        }
     },
     equipo: {
         type: 'node',
@@ -132,6 +160,13 @@ const DeportistaNFL = instance.model('Deportista', {
         type: 'node',
         target: 'Pais',
         relationship: 'ES_DE',
+        direction: 'out',
+        eager: true
+    },
+    contratos: {
+        type: 'nodes',
+        target: 'Contratacion',
+        relationship: 'SUJETO_A_UNA',
         direction: 'out',
         eager: true
     }

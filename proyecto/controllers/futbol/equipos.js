@@ -1,12 +1,12 @@
-const {EquipoNFL} = require('../../models/equipo')
+const {EquipoFutbol} = require('../../models/equipo')
 const {Deporte} = require('../../models/deporte')
 const {response, request} = require('express')
-const { Ciudad } = require('../../models/ciudad')
+const { Pais } = require('../../models/pais')
 
 const getAll = async (req = request, res = response) => {
 
     try {
-        const deporte = await Deporte.find('81d71525-881d-43fa-bd41-4f53e7124f80')
+        const deporte = await Deporte.find('25f556a2-a438-4aaa-8120-c29638f58a2c')
 
         const equipos = deporte.get('equipos')
 
@@ -36,7 +36,7 @@ const post = async (req = request, res = response, next) => {
 
     console.log('entre al post')
 
-    const {ciudad_id} = req.body
+    const {pais_id} = req.body
 
     const {deporte_id} = req.body
 
@@ -52,18 +52,18 @@ const post = async (req = request, res = response, next) => {
 
         }
         
-        const ciudad_origen = await Ciudad.find(ciudad_id)
+        const pais_origen = await Pais.find(pais_id)
 
-        if (!ciudad_origen) {
+        if (!pais_origen) {
 
-            return res.json({status: 'fail', data: 'La ciudad no existe'})
+            return res.json({status: 'fail', data: 'El pais no existe'})
 
         }
 
-        const equipo_nuevo = await EquipoNFL.create(equipo_body)
+        const equipo_nuevo = await EquipoFutbol.create(equipo_body)
 
-        equipo_nuevo.relateTo(ciudad_origen, 'asignado_a')
-        ciudad_origen.relateTo(equipo_nuevo, 'lugar_de_origen_de')
+        equipo_nuevo.relateTo(pais_origen, 'asignado_a')
+        pais_origen.relateTo(equipo_nuevo, 'lugar_de_origen_de')
 
         equipo_nuevo.relateTo(deporte, "practica")
         deporte.relateTo(equipo_nuevo, 'razon_de')
@@ -84,9 +84,9 @@ const put = async (req = request, res = response, next) => {
     try {
         const equipo_id = req.params.id
 
-        const {nombre, fundacion, estadio, division} = req.body
+        const {nombre, fundacion, estadio, liga} = req.body
 
-        const equipo_seleccionado = await EquipoNFL.find(equipo_id)
+        const equipo_seleccionado = await EquipoFutbol.find(equipo_id)
 
         if (!equipo_seleccionado) {
 
@@ -94,7 +94,7 @@ const put = async (req = request, res = response, next) => {
             return res.status(400).json({status: 'fail', data: 'El equipo no existe'})
         }
 
-        const nuevo_nodo = await equipo_seleccionado.update({nombre, fundacion, estadio, division})
+        const nuevo_nodo = await equipo_seleccionado.update({nombre, fundacion, estadio, liga})
 
         const nuevo_nodo_json = await nuevo_nodo.toJson()
 
@@ -115,7 +115,7 @@ const delete_node = async (req = request, res = response, next) => {
         
         const equipo_id = req.params.id
 
-        const equipo_seleccionado = await EquipoNFL.find(equipo_id)
+        const equipo_seleccionado = await EquipoFutbol.find(equipo_id)
 
         if (!equipo_seleccionado) {
 

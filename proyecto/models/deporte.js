@@ -20,7 +20,7 @@ const Deporte = instance.model('Deporte', {
         required: false
     },
     duracion_partido_minutos: {
-        type: 'string',
+        type: 'int',
         required: true
     },
     numero_jugadores: {

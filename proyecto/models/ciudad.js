@@ -35,10 +35,10 @@ const Ciudad = instance.model('Ciudad', {
         eager: true
     },
 
-    lugar_origen_de: {
+    lugar_de_origen_de: {
         type: 'relationship',
         target: 'Equipo',
-        relationship: 'LUGAR_ORIGEN_DE',
+        relationship: 'LUGAR_DE_ORIGEN_DE',
         direction: 'out',
         eager: true
     },
@@ -54,7 +54,7 @@ const Ciudad = instance.model('Ciudad', {
     equipo: {
         type: 'nodes',
         target: 'Equipo',
-        relationship: 'LUGAR_ORIGEN_DE',
+        relationship: 'LUGAR_DE_ORIGEN_DE',
         direction: 'out',
         eager: true
     }

@@ -51,6 +51,6 @@ const Contratacion = instance.model('Contratacion', {
         direction: 'out',
         eager: true
     },
-    
-
 })
+
+module.exports = {Contratacion}
