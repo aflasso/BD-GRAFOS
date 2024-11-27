@@ -178,6 +178,30 @@ const update_contratacion = async (req = request, res = response) => {
 const finish_contratacion = async (req = request, res = response) => {
   
   
+  const {equipo_id} = req.body
+  const {jugador_id} = req.body
+
+  const equipo_seleccionado = await instance.find('Equipo', equipo_id)
+  const jugador_seleccionado = await instance.find('Deportista', jugador_id)
+
+  if (!equipo_seleccionado || !jugador_seleccionado) {
+
+    console.error('El jugador o equipo no existe');
+    return res.status(400).json({status: 'fail', data: 'El jugador o equipo no existe'})
+
+  }
+
+  if (jugador_seleccionado.get('equipo').get('equipo_id') != equipo_seleccionado.get('equipo_id')) {
+
+    console.error(`El jugador ${jugador_seleccionado.get('nombre')} no juega en ${equipo_seleccionado.get('nombre')}`);
+    return res.status(409).json({status: 'fail', data: `El jugador ${jugador_seleccionado.get('nombre')} no juega en ${equipo_seleccionado.get('nombre')}`})
+
+  }
+
+  await jugador_seleccionado.detachFrom(equipo_seleccionado)
+  await equipo_seleccionado.detachFrom(jugador_seleccionado)
+
+  return res.send('ok')
 
 }
 

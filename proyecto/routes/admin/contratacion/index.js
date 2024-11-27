@@ -9,6 +9,6 @@ router.get('/equipo/:equipo_id', get_contrataciones_by_equipo)
 router.get('/jugador/:jugador_id', get_contrataciones_by_jugador)
 router.post('/', post_contratacion)
 router.put('/:id', update_contratacion)
-router.delete('/:id', finish_contratacion)
+router.delete('/', finish_contratacion)
 
 module.exports = router
